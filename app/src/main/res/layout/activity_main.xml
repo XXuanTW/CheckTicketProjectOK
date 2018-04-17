@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+        <SurfaceView
+            android:id="@+id/CamareView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp" />
+
+        <RelativeLayout
+            android:id="@+id/UsernameTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CamareView">
+
+            <TextView
+                android:id="@+id/textUsernameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="購票人："
+                android:textSize="10pt" />
+
+            <TextView
+                android:id="@+id/textUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/textUsernameText"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:textSize="10pt" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/PhoneTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UsernameTextlayout">
+
+            <TextView
+                android:id="@+id/textPhoneText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="電　話："
+                android:textSize="10pt" />
+
+            <TextView
+                android:id="@+id/textPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/textPhoneText"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:textSize="10pt" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/TicketTextlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PhoneTextlayout">
+
+            <TextView
+                android:id="@+id/textTicketText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="持票數："
+                android:textSize="10pt" />
+
+            <TextView
+                android:id="@+id/textTicket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/textTicketText"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:textSize="10pt" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/CheckButton"
+            android:layout_width="173dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TicketTextlayout"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:text="確認"
+            android:textSize="10pt" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/CheckButton"
+            >
+
+            <TextView
+                android:id="@+id/textCheckText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="檢核碼："
+                android:textSize="10pt" />
+
+            <TextView
+                android:id="@+id/textCheckid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@+id/textCheckText"
+                android:gravity="center_horizontal"
+                android:textSize="10pt" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/liftmenu"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        app:menu="@menu/menu" />
+
+</android.support.v4.widget.DrawerLayout>
