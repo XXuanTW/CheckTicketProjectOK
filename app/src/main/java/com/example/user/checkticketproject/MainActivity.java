@@ -172,15 +172,16 @@ public class MainActivity extends AppCompatActivity {
         CheckidButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int ticket = Integer.valueOf(textTicket.getText().toString());
-                if (ticket < 1) {
-
-                    //彈跳視窗
-                    ShowAlertDialog();
-                } else {
-                    url = "http://www.itioi.com/TicketUPDATE.php?pwd=0937966664&checkid=";
-                    url = url + textCheckid.getText().toString();
-                    new TransTask().execute(url);
+                if (!"".equals(textTicket.getText().toString())) {
+                    int ticket = Integer.valueOf(textTicket.getText().toString());
+                    if (ticket < 1) {
+                        //彈跳視窗
+                        ShowAlertDialog();
+                    } else {
+                        url = "http://www.itioi.com/TicketUPDATE.php?pwd=0937966664&checkid=";
+                        url = url + textCheckid.getText().toString();
+                        new TransTask().execute(url);
+                    }
                 }
             }
         });

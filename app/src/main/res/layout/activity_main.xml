@@ -129,6 +129,7 @@
                 android:layout_marginLeft="1dp"
                 android:layout_toRightOf="@+id/textCheckText"
                 android:gravity="center_horizontal"
+                android:text=""
                 android:textSize="10pt" />
         </RelativeLayout>
 
