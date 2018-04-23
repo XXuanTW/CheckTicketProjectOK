@@ -7,9 +7,14 @@
             android:title="檢票系統"
             />
         <item
-            android:id="@+id/action_qrcode"
-            android:checked="true"
-            android:title="查詢系統"
+        android:id="@+id/action_qrcode"
+        android:checked="true"
+        android:title="查詢系統"
+        />
+        <item
+        android:id="@+id/action_NFC"
+        android:checked="true"
+        android:title="NFC"
             />
     </group>
 </menu>

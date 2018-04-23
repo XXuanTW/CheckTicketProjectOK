@@ -261,6 +261,11 @@ public class DataViewActivity extends AppCompatActivity {
                     // 按下「QRcode模式」要做的事
                     Toast.makeText(DataViewActivity.this, "目前顯示頁面：查詢模式", Toast.LENGTH_SHORT).show();
                     return true;
+                }else if (id == R.id.action_NFC){
+                    Intent intent = new Intent();
+                    intent.setClass(DataViewActivity.this,NFCActivity.class);
+                    DataViewActivity.this.finish();
+                    startActivity(intent);
                 }
                 return false;
             }

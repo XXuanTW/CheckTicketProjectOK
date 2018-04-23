@@ -137,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                             vibrator.vibrate(500);
+                            textUsername.setText("");
+                            textPhone.setText("");
+                            textTicket.setText("");
                             textCheckid.setText(qrcodes.valueAt(0).displayValue);
                             runCode();
 
@@ -304,6 +307,12 @@ public class MainActivity extends AppCompatActivity {
 //                    Bundle bundle = new Bundle();
 //                    bundle.putString("QRcodeID",textView.getText().toString());
 //                    intent.putExtras(bundle);
+                            startActivity(intent);
+                            return true;
+                        }else if (id == R.id.action_NFC){
+                            Intent intent = new Intent();
+                            intent.setClass(MainActivity.this,NFCActivity.class);
+                            MainActivity.this.finish();
                             startActivity(intent);
                             return true;
                         }
