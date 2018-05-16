@@ -34,7 +34,7 @@
 
         </activity>
         <activity android:name=".DataViewActivity" />
-        <activity android:name=".NFCActivity"></activity>
+        <activity android:name=".MainSetting"></activity>
     </application>
 
 </manifest>

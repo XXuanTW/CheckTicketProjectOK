@@ -12,9 +12,9 @@
         android:title="查詢系統"
         />
         <item
-        android:id="@+id/action_NFC"
+        android:id="@+id/action_setting"
         android:checked="true"
-        android:title="NFC"
+        android:title="設定"
             />
     </group>
 </menu>

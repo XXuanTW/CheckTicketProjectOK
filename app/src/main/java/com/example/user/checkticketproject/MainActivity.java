@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -54,6 +56,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     Button CheckidButton;
     SurfaceView CamreaView;
+    String dataSQL;
     TextView textUsername ;
     TextView textPhone;
     TextView textTicket;
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     BarcodeDetector barcodeDetector;
     final int CameraID = 1;
     String url;
+    SQLdata DH = null;
     
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -80,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mainlayout = (DrawerLayout) findViewById(R.id.main_layout);
         liftmenu = (NavigationView) findViewById(R.id.liftmenu);
-
+        DH = new SQLdata(this);
+        addurl();
         SetToolBar();
         SetLifeMenu();
 
@@ -146,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         private void runCode() {
-                            url ="http://www.itioi.com/Checkid.php?pwd=0937966664&checkid=";
+                            url ="http://"+dataSQL+"/Checkid.php?pwd=0937966664&checkid=";
                             url =  url+textCheckid.getText().toString();
 //                            new Thread(new Runnable(){
 //
@@ -181,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                         //彈跳視窗
                         ShowAlertDialog();
                     } else {
-                        url = "http://www.itioi.com/TicketUPDATE.php?pwd=0937966664&checkid=";
+                        url = "http://"+dataSQL+"/TicketUPDATE.php?pwd=0937966664&checkid=";
                         url = url + textCheckid.getText().toString();
                         new TransTask().execute(url);
                     }
@@ -190,6 +195,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void addurl() {
+
+        SQLiteDatabase db = DH.getWritableDatabase();
+        Cursor cursor = db.query("data", new String[]{"_id", "_url"}, null, null, null, null, null);
+        while (cursor.moveToNext()){
+            dataSQL= cursor.getString(1);
+        }
+
+
+    }
 
     private void ShowAlertDialog()
     {
@@ -309,9 +324,9 @@ public class MainActivity extends AppCompatActivity {
 //                    intent.putExtras(bundle);
                             startActivity(intent);
                             return true;
-                        }else if (id == R.id.action_NFC){
+                        }else if (id == R.id.action_setting){
                             Intent intent = new Intent();
-                            intent.setClass(MainActivity.this,NFCActivity.class);
+                            intent.setClass(MainActivity.this, MainSetting.class);
                             MainActivity.this.finish();
                             startActivity(intent);
                             return true;

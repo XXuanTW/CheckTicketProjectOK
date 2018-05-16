@@ -1,6 +1,8 @@
 package com.example.user.checkticketproject;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -40,9 +42,11 @@ public class DataViewActivity extends AppCompatActivity {
     Button serachbutton;
     Button refresh;
     EditText textphone;
+    String dataSQL;
     ArrayList<HashMap<String, String>> arrayList;
     int sublist;
-    String url ="http://www.itioi.com/Sublist.php?pwd=0937966664";
+    SQLdata DH = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,26 +58,39 @@ public class DataViewActivity extends AppCompatActivity {
         serachbutton = (Button)findViewById(R.id.serachphone);
         refresh = (Button)findViewById(R.id.refresh);
         textphone = (EditText)findViewById(R.id.textphone);
-        new TransTask().execute(url);
-        new TransTaskList().execute("http://www.itioi.com/Sublist.php?pwd=0937966664");
+        DH = new SQLdata(this);
+        addurl();
+        new TransTask().execute("http://"+dataSQL+"/Sublist.php?pwd=0937966664");
+        new TransTaskList().execute("http://"+dataSQL+"/Sublist.php?pwd=0937966664");
         settoolbar();
         setliftmenu();
 
         serachbutton.setOnClickListener(new Button.OnClickListener(){
           public void onClick(View view){
-              new TransTaskList().execute("http://www.itioi.com/Serachlist.php?pwd=0937966664&phone="+textphone.getText().toString());
+              new TransTaskList().execute("http://"+dataSQL+"/Serachlist.php?pwd=0937966664&phone="+textphone.getText().toString());
           }
         });
 
         refresh.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View view){
-                new TransTaskList().execute("http://www.itioi.com/Sublist.php?pwd=0937966664");
-                new TransTask().execute(url);
+                new TransTaskList().execute("http://"+dataSQL+"/Sublist.php?pwd=0937966664");
+                new TransTask().execute("http://"+dataSQL+"/Sublist.php?pwd=0937966664");
             }
         });
 
     }
 
+
+    private void addurl() {
+
+        SQLiteDatabase db = DH.getWritableDatabase();
+        Cursor cursor = db.query("data", new String[]{"_id", "_url"}, null, null, null, null, null);
+        while (cursor.moveToNext()){
+            dataSQL= cursor.getString(1);
+        }
+
+
+    }
     //Json 解析
     class TransTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... params) {
@@ -216,7 +233,7 @@ public class DataViewActivity extends AppCompatActivity {
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                new TransTaskList().execute("http://www.itioi.com/Sublist.php?pwd=0937966664");
+                new TransTaskList().execute("http://"+dataSQL+"/Sublist.php?pwd=0937966664");
                 return true;
             }
         });
@@ -261,9 +278,9 @@ public class DataViewActivity extends AppCompatActivity {
                     // 按下「QRcode模式」要做的事
                     Toast.makeText(DataViewActivity.this, "目前顯示頁面：查詢模式", Toast.LENGTH_SHORT).show();
                     return true;
-                }else if (id == R.id.action_NFC){
+                }else if (id == R.id.action_setting){
                     Intent intent = new Intent();
-                    intent.setClass(DataViewActivity.this,NFCActivity.class);
+                    intent.setClass(DataViewActivity.this,MainSetting.class);
                     DataViewActivity.this.finish();
                     startActivity(intent);
                 }
